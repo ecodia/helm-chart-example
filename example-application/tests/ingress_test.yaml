@@ -1,0 +1,28 @@
+suite: test ingress
+templates:
+  - ingress.yaml
+tests:
+  - it: should render nothing if not disabled
+    set:
+      ingress:
+        enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: should be of type ingress
+    set:
+       ingress:
+         enabled: true
+    asserts:
+      - isKind:
+          of: Ingress
+  - it: manifest should match snapshot
+    set:
+      ingress:
+        enabled: true
+      image:
+        repository: test-docker-registry
+        tag: 1.2.3-TEST
+    asserts:
+      - matchSnapshot:
+          path: spec

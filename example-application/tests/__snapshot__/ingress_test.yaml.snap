@@ -1,0 +1,6 @@
+manifest should match snapshot:
+  1: |
+    rules:
+    - host: chart-example.local
+      http:
+        paths: null

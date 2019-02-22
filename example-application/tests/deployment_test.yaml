@@ -1,0 +1,16 @@
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: should be of type Deployment
+    asserts:
+      - isKind:
+          of: Deployment
+  - it: manifest should match snapshot
+    set:
+      image:
+        repository: test-docker-registry
+        tag: 1.2.3-TEST
+    asserts:
+      - matchSnapshot:
+          path: spec
